@@ -1,0 +1,55 @@
+@use "../../assets/scss/partials/variables.scss" as *;
+@use "../../assets/scss/partials/mixins.scss" as m;
+@use "../../assets/scss/partials/functions.scss" as f;
+
+.dropdown {
+    @include m.position(relative);
+
+    // List
+    &__list {
+        @include m.position(absolute, $t: calc(100% + f.em(8)), $r: 0, $l: 0);
+
+        display: none;
+        border: solid f.em(1.5) $color-black;
+        border-radius: f.em(8);
+
+        overflow: hidden;
+
+        &__item {
+            &:not(:last-child) {
+                border-bottom: solid f.em(1.5) $color-black;
+            }
+
+            .item {
+                &__button {
+                    @include m.flex($ai: center, $gap: f.em(8));
+
+                    width: 100%;
+                    padding: f.em(8) f.em(24) f.em(8) f.em(20);
+                    border: none;
+
+                    background-color: $color-white;
+
+                    font-size: f.em(16);
+                    font-weight: normal;
+
+                    transition: $transition;
+                    cursor: pointer;
+
+                    // Icon
+                    &__icon {
+                        padding: f.em(1);
+                    }
+
+                    // Hover
+                    &:hover {
+                        background-color: $color-gray;
+                    }
+                }
+            }
+        }
+        &.open {
+            display: block;
+        }
+    }
+}

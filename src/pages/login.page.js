@@ -6,10 +6,17 @@ import { useDispatch } from 'react-redux'
 import { setUser } from '../redux/reducers/login-reducer'
 import { useNavigate } from 'react-router-dom'
 
+import Button from '../components/button/button.component'
+
+import MailRoundedIcon from '@mui/icons-material/MailRounded'
+import GoogleIcon from '@mui/icons-material/Google'
+import AppleIcon from '@mui/icons-material/Apple'
+import Input from '../components/input/input.component'
+
 
 const Login = () => {
-    const [username, setUsername] = useState( 'fer' )
-    const [password, setPassword] = useState( '1234' )
+    const [username, setUsername] = useState( 'fer bendala' )
+    const [password, setPassword] = useState( 'estaesunaContraseñad3l0m4sExtraña' )
 
     const dispatch = useDispatch()
     const navigate = useNavigate()
@@ -31,37 +38,51 @@ const Login = () => {
     }
 
     return (
-        <form onSubmit={handleLogin}>
-            <fieldset>
-                <legend>Login</legend>
-                <label htmlFor='username'>
-                    <span>username</span>
-                    <input
+        <>
+            <form onSubmit={handleLogin}>
+                <fieldset>
+                    <legend>Login</legend>
+                    <Input
                         id='username'
-                        name='username'
+                        label='Nombre de usuario'
                         type='text'
                         value={username}
-                        onChange={( { target } ) => setUsername( target.value )}
+                        setValue={( { target } ) => setUsername( target.value )}
                     />
-                </label>
-                <label htmlFor='password'>
-                    <span>password</span>
-                    <input
+                    <Input
                         id='password'
-                        name='password'
+                        label='Contraseña'
                         type='password'
                         value={password}
-                        onChange={( { target } ) => setPassword( target.value )}
+                        setValue={setUsername}
                     />
-                </label>
-                <button
-                    id='button-submit'
-                    type='submit'
-                >
-                    login
-                </button>
-            </fieldset>
-        </form>
+                    <Button
+                        text='Continue'
+                        type='submit'
+                    />
+                </fieldset>
+            </form>
+
+            <div>or</div>
+
+            <div>
+                <Button
+                    Icon={MailRoundedIcon}
+                    text='Sign in with mail'
+                    secondary={true}
+                />
+                <Button
+                    Icon={AppleIcon}
+                    text='Continue with google'
+                    secondary={true}
+                />
+                <Button
+                    Icon={GoogleIcon}
+                    text='Continue with apple'
+                    secondary={true}
+                />
+            </div>
+        </>
     )
 }
 

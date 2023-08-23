@@ -1,20 +1,22 @@
 import { Link } from 'react-router-dom'
 import HeaderDropdown from '../dropdown/dropdown.component'
 
-import './header.component.scss'
+import styles from './header.module.scss'
 
 const Header = () => {
     return (
-        <header className='header'>
-            <h1 className='header__title'>
-                <Link to='/' className='header__title__link' >
-                    Modulo económico - Supermercados
-                </Link>
-            </h1>
-            <div className='header__user'>
-                <HeaderDropdown />
+        <header className={styles['header']}>
+            <div className={styles['header__container']}>
+                <h1 className={styles['header__title']}>
+                    <Link to='/' className={styles['header__title__link']} >
+                        Modulo económico - Supermercados
+                    </Link>
+                </h1>
+                <div className={styles['header__user']}>
+                    <HeaderDropdown />
+                </div>
             </div>
-        </header >
+        </header>
     )
 }
 

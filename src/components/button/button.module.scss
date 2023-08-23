@@ -1,0 +1,55 @@
+@use "../../assets/scss/partials/variables.scss" as *;
+@use "../../assets/scss/partials/mixins.scss" as m;
+@use "../../assets/scss/partials/functions.scss" as f;
+
+.button {
+    @include m.flex($ai: center, $gap: f.em(8));
+
+    height: f.em(40);
+    padding: f.em(8) f.em(32);
+    border: none;
+    border: solid f.em(1.5) $color-black;
+    border-radius: f.em(40);
+
+    background-color: $color-black;
+    color: $color-white;
+
+    font-size: f.em(16);
+
+    transition: $transition;
+    cursor: pointer;
+
+    // Icon
+    &__icon {
+        width: f.em(24);
+        height: f.em(24);
+        padding: f.em(1);
+    }
+
+    // Text
+    &__text {
+        text-transform: capitalize;
+    }
+
+    // Hover
+    &:hover {
+        background-color: $color-white;
+        color: $color-black;
+    }
+
+    // If only has icon
+    &--only-icon {
+        padding: f.em(8) f.em(16);
+    }
+
+    // Secondary
+    &--secondary {
+        background-color: $color-white;
+        color: $color-black;
+
+        // Hover
+        &:hover {
+            background-color: $color-gray;
+        }
+    }
+}

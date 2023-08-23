@@ -3,10 +3,13 @@ import { useEffect, useRef, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { setUser } from '../../redux/reducers/login-reducer'
 
+import Button from '../button/button.component'
+
 import PowerSettingsNewRoundedIcon from '@mui/icons-material/PowerSettingsNewRounded'
 import AccountCircleRoundedIcon from '@mui/icons-material/AccountCircleRounded'
+import SettingsRoundedIcon from '@mui/icons-material/SettingsRounded'
 
-import './dropdown.component.scss'
+import styles from './dropdown.module.scss'
 
 const HeaderDropdown = () => {
     const username = useSelector( state => state.login.username )
@@ -45,27 +48,34 @@ const HeaderDropdown = () => {
 
     return (
         <div
-            className='dropdown'
+            className={styles['dropdown']}
             ref={dropdownRef}
         >
             {/* Dropdown button */}
-            <button
-                onClick={handleDropdown}
-                className='dropdown__button'
-            >
-                <AccountCircleRoundedIcon className='dropdown__button__logo' />
-                <span className='dropdown__button__name'>{username}</span>
-            </button>
+            <Button
+                Icon={AccountCircleRoundedIcon}
+                text={username}
+                handleAction={handleDropdown}
+            />
 
             {/* Dropdown panel list */}
-            <ul className={`dropdown__list ${openDropdown ? 'open' : ''}`}>
-                <li className='dropdown__list__item'>
+            <ul className={openDropdown
+                ? [styles['dropdown__list'], styles['open']].join( ' ' )
+                : styles['dropdown__list']
+            }>
+                <li className={styles['dropdown__list__item']}>
                     <button
                         onClick={logout}
-                        className='item__button'
+                        className={styles['item__button']}
                     >
-                        <PowerSettingsNewRoundedIcon className='item__button__icon' />
-                        <span className='item__button__text'>Loggout</span>
+                        <PowerSettingsNewRoundedIcon className={styles['item__button__icon']} />
+                        <span className={styles['item__button__text']}>Loggout</span>
+                    </button>
+                </li>
+                <li className={styles['dropdown__list__item']}>
+                    <button className={styles['item__button']}>
+                        <SettingsRoundedIcon className={styles['item__button__icon']} />
+                        <span className={styles['item__button__text']}>Settings</span>
                     </button>
                 </li>
             </ul>
