@@ -1,0 +1,37 @@
+@use "../../assets/scss/partials/variables.scss" as *;
+@use "../../assets/scss/partials/mixins.scss" as m;
+@use "../../assets/scss/partials/functions.scss" as f;
+
+// Header
+.header {
+    @include m.container;
+    @include m.flex($ai: center, $jc: space-between);
+
+    margin: {
+        top: f.em(24);
+        bottom: f.em(32);
+    }
+
+    border-bottom: solid f.em(1) $color-gray;
+
+    &__title {
+        font-size: f.em(24);
+
+        &__link {
+            @include m.flex($ai: center);
+
+            margin-bottom: f.em(12);
+
+            color: $color-blue;
+
+            font-weight: 700;
+            text-decoration: none;
+
+            transition: $transition;
+
+            &:hover {
+                color: darken($color-blue, 16%);
+            }
+        }
+    }
+}

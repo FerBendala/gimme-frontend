@@ -5,21 +5,21 @@ import { useSelector } from 'react-redux'
 
 import Layout from './layout/layout'
 
-import Home from './pages/home'
-import Login from './pages/login'
-import PageNotFound from './pages/page-not-found'
+import Home from './pages/home.page'
+import Login from './pages/login.page'
+import PageNotFound from './pages/not-found.page'
 
 import './assets/scss/index.scss'
 
 const App = () => {
-    const username = useSelector( ( state ) => state.login.username )
+    const user = useSelector( ( state ) => state.login.username )
     const navigate = useNavigate()
 
-    const userIsLogged = username.length > 0
-
     useEffect( () => {
-        if ( !userIsLogged ) navigate( '/login' )
-    }, [userIsLogged, navigate] )
+        // Check if user is logged
+        if ( user === undefined )
+            navigate( '/login' )
+    }, [user, navigate] )
 
     return (
         <section className='container'>
@@ -30,7 +30,7 @@ const App = () => {
                     <Route path='*' element={<PageNotFound />} />
                 </Route>
 
-                {/* Login page */}
+                {/* Login */}
                 <Route path='login' element={<Login />} />
             </Routes>
         </section>

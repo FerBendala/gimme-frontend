@@ -1,7 +1,7 @@
 import { useEffect } from 'react'
 
-import mercadonaData from '../data/mercadona-18082023-093743.json'
-import capraboData from '../data/caprabo-18082023-093743.json'
+import mercadonaData from '../assets/data/mercadona-18082023-093743.json'
+import capraboData from '../assets/data/caprabo-18082023-093743.json'
 
 const Home = () => {
 

@@ -6,6 +6,7 @@ import { useDispatch } from 'react-redux'
 import { setUser } from '../redux/reducers/login-reducer'
 import { useNavigate } from 'react-router-dom'
 
+
 const Login = () => {
     const [username, setUsername] = useState( 'fer' )
     const [password, setPassword] = useState( '1234' )
@@ -23,7 +24,7 @@ const Login = () => {
 
 
             alert( `Hello ${validUser.username}! Nice to have you here` )
-            navigate('/')
+            navigate( '/' )
         } catch ( error ) {
             alert( 'Wrong username or password' )
         }
