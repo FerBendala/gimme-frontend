@@ -1,13 +1,13 @@
 import { persistReducer } from 'redux-persist'
 import storage from 'redux-persist/lib/storage'
-import podcastsReducer from './reducers/podcasts-reducer'
+import userReducer from './reducers/login-reducer'
 
 const persistConfig = {
-    key: 'podcasts',
+    key: 'login',
     storage,
 }
 
-const persistedPodcastsReducer =
-    persistReducer( persistConfig, podcastsReducer )
+const persistedLoginReducer =
+    persistReducer( persistConfig, userReducer )
 
-export { persistedPodcastsReducer }
+export { persistedLoginReducer }

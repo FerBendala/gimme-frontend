@@ -2,20 +2,28 @@ import { useState } from 'react'
 
 import loginService from '../services/login'
 
+import { useDispatch } from 'react-redux'
+import { setUser } from '../redux/reducers/login-reducer'
+import { useNavigate } from 'react-router-dom'
+
 const Login = () => {
     const [username, setUsername] = useState( 'fer' )
     const [password, setPassword] = useState( '1234' )
+
+    const dispatch = useDispatch()
+    const navigate = useNavigate()
 
     const handleLogin = async ( event ) => {
         event.preventDefault()
 
         try {
-            const validUser = await loginService.login( { username, password } )
             // Set user session
-            console.log( validUser )
+            const validUser = await loginService.login( { username, password } )
+            dispatch( setUser( validUser.username ) )
 
-            // Set the token for the user to be able to manage their own posts
+
             alert( `Hello ${validUser.username}! Nice to have you here` )
+            navigate('/')
         } catch ( error ) {
             alert( 'Wrong username or password' )
         }
