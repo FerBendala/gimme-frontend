@@ -5,6 +5,7 @@
 // Header
 .header {
     background-color: $color-black;
+    margin-bottom: f.em(32);
 
     // Container
     &__container {
@@ -12,7 +13,6 @@
         @include m.flex($ai: center, $jc: space-between);
 
         padding: f.em(24) 0;
-        margin-bottom: f.em(32);
     }
 
     // Title

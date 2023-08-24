@@ -1,0 +1,30 @@
+@use "../../assets/scss/partials/variables.scss" as *;
+@use "../../assets/scss/partials/mixins.scss" as m;
+@use "../../assets/scss/partials/functions.scss" as f;
+
+.form {
+    padding: f.em(32);
+    margin: auto;
+    max-width: f.em(400);
+    width: 100%;
+    border: solid f.em(1.5) $color-black;
+    border-radius: f.em(16);
+
+    &__title {
+        margin-bottom: f.em(16);
+
+        font-size: f.em(28);
+        font-weight: bold;
+        text-align: center;
+    }
+
+    button {
+        @include m.flex($jc: center);
+
+        width: 100%;
+
+        &:not(:last-of-type) {
+            margin-bottom: f.em(16);
+        }
+    }
+}

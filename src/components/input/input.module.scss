@@ -1,0 +1,28 @@
+@use "../../assets/scss/partials/variables.scss" as *;
+@use "../../assets/scss/partials/mixins.scss" as m;
+@use "../../assets/scss/partials/functions.scss" as f;
+
+.input {
+    height: f.em(40);
+    padding: 0 f.em(16);
+    border: solid f.em(1.5) $color-black;
+    border-radius: f.em(24);
+
+    font-family: $font-family;
+
+    &__label {
+        @include m.flex($fd: column);
+
+        margin-bottom: f.em(16);
+
+        &:last-of-type {
+            margin-bottom: f.em(32);
+        }
+    }
+
+    &__text {
+        padding: f.em(8) f.em(16);
+
+        font-weight: bold;
+    }
+}

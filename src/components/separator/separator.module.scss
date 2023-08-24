@@ -1,0 +1,20 @@
+@use "../../assets/scss/partials/variables.scss" as *;
+@use "../../assets/scss/partials/mixins.scss" as m;
+@use "../../assets/scss/partials/functions.scss" as f;
+
+.separator {
+    @include m.flex($ai: center);
+
+    margin: f.em(32) 0;
+
+    &__line {
+        width: 100%;
+        border-bottom: solid f.em(1) $color-black;
+    }
+
+    &__text {
+        margin: 0 f.em(16);
+
+        font-weight: bold;
+    }
+}

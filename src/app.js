@@ -10,30 +10,34 @@ import Login from './pages/login.page'
 import PageNotFound from './pages/not-found.page'
 
 import './assets/scss/index.scss'
+import SignIn from './pages/signin.page'
 
 const App = () => {
     const user = useSelector( ( state ) => state.login.username )
     const navigate = useNavigate()
 
     useEffect( () => {
+        const signInPage = location.pathname !== '/sign-in'
+        const redirectToLogin = user === undefined && signInPage
         // Check if user is logged
-        if ( user === undefined )
+        if ( redirectToLogin )
             navigate( '/login' )
     }, [user, navigate] )
 
     return (
-        <section className='container'>
-            <Routes>
-                {/* App */}
-                <Route path="/" element={<Layout />}>
-                    <Route index element={<Home />} />
-                    <Route path='*' element={<PageNotFound />} />
-                </Route>
+        <Routes>
+            {/* App */}
+            <Route path="/" element={<Layout />}>
+                <Route index element={<Home />} />
+                <Route path='*' element={<PageNotFound />} />
+            </Route>
 
-                {/* Login */}
-                <Route path='login' element={<Login />} />
-            </Routes>
-        </section>
+            {/* Allow access to sign-in */}
+            <Route path='sign-in' element={<SignIn />} />
+
+            {/* Login */}
+            <Route path='login' element={<Login />} />
+        </Routes>
     )
 }
 
