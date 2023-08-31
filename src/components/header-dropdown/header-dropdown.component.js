@@ -1,7 +1,7 @@
 import { useEffect, useRef, useState } from 'react'
 
 import { useDispatch, useSelector } from 'react-redux'
-import { setUser } from '../../redux/reducers/login-reducer'
+import { resetUser } from '../../redux/reducers/login-reducer'
 
 import Button from '../button/button.component'
 
@@ -9,10 +9,10 @@ import PowerSettingsNewRoundedIcon from '@mui/icons-material/PowerSettingsNewRou
 import AccountCircleRoundedIcon from '@mui/icons-material/AccountCircleRounded'
 import SettingsRoundedIcon from '@mui/icons-material/SettingsRounded'
 
-import styles from './dropdown.module.scss'
+import styles from './header-dropdown.module.scss'
 
 const HeaderDropdown = () => {
-    const username = useSelector( state => state.login.username )
+    const user = useSelector( state => state.login )
     const [openDropdown, setOpenDropdown] = useState( false )
 
     const dispatch = useDispatch()
@@ -39,10 +39,10 @@ const HeaderDropdown = () => {
 
     // Set undefined value to username when click logout
     const logout = () => {
-        dispatch( setUser( undefined ) )
+        dispatch( resetUser( undefined ) )
     }
 
-    if ( !username ) {
+    if ( !user.username ) {
         return null
     }
 
@@ -53,8 +53,9 @@ const HeaderDropdown = () => {
         >
             {/* Dropdown button */}
             <Button
-                Icon={AccountCircleRoundedIcon}
-                text={username}
+                picture={user.picture && user.picture}
+                Icon={!user.picture && AccountCircleRoundedIcon}
+                text={user.username}
                 handleAction={handleDropdown}
             />
 
@@ -63,6 +64,16 @@ const HeaderDropdown = () => {
                 ? [styles['dropdown__list'], styles['open']].join( ' ' )
                 : styles['dropdown__list']
             }>
+                <li className={styles['dropdown__list__item']}>
+                    <figure className={styles['item__user']}>
+                        {user.picture
+                            ? <img src={user.picture} alt={user.username} className={styles['item__user__image']} />
+                            : <AccountCircleRoundedIcon className={styles['item__user__icon']} />
+                        }
+
+                        <figcaption className={styles['item__user__name']}>{user.username}</figcaption>
+                    </figure>
+                </li>
                 <li className={styles['dropdown__list__item']}>
                     <button
                         onClick={logout}

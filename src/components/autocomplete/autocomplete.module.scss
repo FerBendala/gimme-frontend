@@ -1,0 +1,55 @@
+@use "../../assets/scss/partials/variables.scss" as *;
+@use "../../assets/scss/partials/mixins.scss" as m;
+@use "../../assets/scss/partials/functions.scss" as f;
+
+.autocomplete {
+    @include m.position(relative);
+
+    &__container {
+        padding: f.em(16);
+        border: solid f.em(1.5) $color-black;
+        border-radius: f.em(16);
+
+        overflow: hidden;
+    }
+
+    &__list {
+        max-height: f.em(302);
+        overflow: auto;
+        &__title {
+            margin-bottom: f.em(8);
+
+            font-size: f.em(18);
+            font-weight: bold;
+            text-transform: capitalize;
+        }
+
+        &__item {
+            @include m.flex($ai: center, $gap: f.em(16));
+
+            .item {
+                &__image {
+                    width: f.em(64);
+                    height: f.em(64);
+                }
+                &__info {
+                    &__name {
+                    }
+                    &__price {
+                        font-weight: bold;
+                    }
+                }
+            }
+
+            &:not(:last-of-type) {
+                margin-bottom: f.em(12);
+            }
+        }
+
+        &:not(:last-of-type) {
+            padding-bottom: f.em(16);
+            margin-bottom: f.em(16);
+            border-bottom: solid f.em(1.5) $color-black;
+        }
+    }
+}

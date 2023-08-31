@@ -4,7 +4,6 @@
 
 // Main content
 .main {
-    @include m.container;
     margin-bottom: f.em(80);
 
     &__grid {

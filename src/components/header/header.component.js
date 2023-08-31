@@ -1,5 +1,5 @@
 import { Link } from 'react-router-dom'
-import HeaderDropdown from '../dropdown/dropdown.component'
+import HeaderDropdown from '../header-dropdown/header-dropdown.component'
 
 import styles from './header.module.scss'
 

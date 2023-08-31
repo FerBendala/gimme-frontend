@@ -3,6 +3,8 @@
 @use "../../assets/scss/partials/functions.scss" as f;
 
 .form {
+    @include m.position(relative);
+
     padding: f.em(32);
     margin: auto;
     max-width: f.em(400);
@@ -25,6 +27,23 @@
 
         &:not(:last-of-type) {
             margin-bottom: f.em(16);
+        }
+    }
+
+    &__back-button {
+        @include m.position(absolute, $t: f.em(40), $l: f.em(120));
+
+        max-width: f.em(24);
+        border: none;
+
+        color: $color-black;
+        background-color: transparent;
+
+        cursor: pointer;
+        transition: $transition;
+
+        &:hover {
+            color: $color-gray;
         }
     }
 }

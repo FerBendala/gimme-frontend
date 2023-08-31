@@ -26,3 +26,8 @@
         font-weight: bold;
     }
 }
+
+.error {
+    border-color: $color-red;
+    color: $color-red;
+}

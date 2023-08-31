@@ -26,6 +26,13 @@
         padding: f.em(1);
     }
 
+    // Icon
+    &__image {
+        width: f.em(24);
+        height: f.em(24);
+        border-radius: f.em(24);
+    }
+
     // Text
     &__text {
         text-transform: capitalize;
