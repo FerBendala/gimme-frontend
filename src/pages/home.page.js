@@ -2,8 +2,9 @@ import { useEffect, useState } from 'react'
 
 import AutoComplete from '../components/autocomplete/autocomplete.component'
 
-import mercadonaData from '../assets/data/mercadona-18082023-093743.json'
-import capraboData from '../assets/data/caprabo-18082023-093743.json'
+import Fuse from 'fuse.js'
+import mercadonaData from '../assets/data/mercadona.json'
+import capraboData from '../assets/data/caprabo.json'
 
 const Home = () => {
     const [searchTerm, setSearchTerm] = useState( '' )
@@ -11,36 +12,30 @@ const Home = () => {
 
     useEffect( () => {
         if ( searchTerm ) {
-            let mercadona = []
-            let caprabo = []
-
-            // Check data
-            if ( searchTerm.length > 3 ) {
-                // Check Mercadona data
-                for ( const category of Object.keys( mercadonaData ) ) {
-                    for ( const subcategory of Object.keys( mercadonaData[category] ) ) {
-                        for ( const subcategoryOfSubcategory of Object.keys( mercadonaData[category][subcategory] ) ) {
-                            mercadonaData[category][subcategory][subcategoryOfSubcategory].filter( product => {
-                                if ( product.name.toLowerCase().includes( searchTerm.toLowerCase() ) ) {
-                                    mercadona.push( product )
-                                }
-                            } )
-                        }
+            const debounceTimer = setTimeout( () => {
+                if ( searchTerm.length > 3 ) {
+                    // Configurar opciones para la búsqueda difusa
+                    const fuseOptions = {
+                        keys: ['name'],
+                        threshold: 0.3,
                     }
-                }
 
-                // Check Caprabo data
-                for ( const category of Object.keys( capraboData ) ) {
-                    capraboData[category].filter( product => {
-                        if ( product.name.toLowerCase().includes( searchTerm.toLowerCase() ) ) {
-                            caprabo.push( product )
-                        }
+                    // Crear una instancia de Fuse con los datos y opciones
+                    const mercadonaFuse = new Fuse( mercadonaData, fuseOptions )
+                    const capraboFuse = new Fuse( capraboData, fuseOptions )
+
+                    // Realizar la búsqueda difusa
+                    Promise.all( [
+                        mercadonaFuse.search( searchTerm ),
+                        capraboFuse.search( searchTerm ),
+                    ] ).then( ( [mercadona, caprabo] ) => {
+                        setFilteredData( [{ mercadona }, { caprabo }] )
                     } )
                 }
-            }
+            }, 2000 ) // Tiempo de espera de 2 segundos
 
-            // Get data
-            setFilteredData( [{ mercadona }, { caprabo }] )
+            // Limpiar el temporizador anterior en cada cambio de término de búsqueda
+            return () => clearTimeout( debounceTimer )
         } else {
             // Clear the filtered data if searchTerm is empty
             setFilteredData( [] )

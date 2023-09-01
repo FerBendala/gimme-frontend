@@ -34,22 +34,24 @@ const AutoComplete = ( { data = [], searchTerm, setSearchTerm } ) => {
                                     key={index}
                                     className={styles['autocomplete__list']}
                                 >
-                                    {products?.map( ( product, key ) => (
-                                        <li
-                                            key={key}
-                                            className={styles['autocomplete__list__item']}
-                                        >
-                                            <img
-                                                src={product.image}
-                                                alt={product.name}
-                                                className={styles['item__image']}
-                                            />
-                                            <div className={styles['item__info']}>
-                                                <p className={styles['item__info__name']}>{product.name} {product?.description && `- ${product?.description}`}</p>
-                                                <p className={styles['item__info__price']}>{product.price}</p>
-                                            </div>
-                                        </li>
-                                    ) )}
+                                    {products?.map( ( { item, refIndex } ) => {
+                                        return (
+                                            <li
+                                                key={refIndex}
+                                                className={styles['autocomplete__list__item']}
+                                            >
+                                                <img
+                                                    src={item.image}
+                                                    alt={item.name}
+                                                    className={styles['item__image']}
+                                                />
+                                                <div className={styles['item__info']}>
+                                                    <p className={styles['item__info__name']}>{item.name} {item?.description && `- ${item?.description}`}</p>
+                                                    <p className={styles['item__info__price']}>{item.price}</p>
+                                                </div>
+                                            </li>
+                                        )
+                                    } )}
                                 </ul>
                             </>
                         )
